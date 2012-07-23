@@ -1,65 +1,22 @@
-[Skip to content]
-
-  * [Home](/)
-  * [Browsers](/products/)
-    * [Opera for Windows, Mac & Linux](/browser/)
-    * [Opera for phones](/mobile/)
-    * [Opera for tablets](/mobile/features/tablets/)
-    * [Download Opera](/download/)
-  * [Add-ons](http://addons.opera.com/)
-    * [Opera extensions](https://addons.opera.com/extensions/)
-    * [Opera themes](https://addons.opera.com/themes/)
-    * [Opera Link](/link/)
-    * [Opera Mail](/mail/)
-    * [Opera Turbo](/browser/turbo/)
-  * [Community](/community/)
-    * [My Opera](http://my.opera.com/community/)
-    * [Opera news blog](http://my.opera.com/chooseopera/blog/)
-    * [Education](/company/education/)
-    * [Forums](http://my.opera.com/community/forums/)
-  * [Developer](/developer/)
-    * [Developer tools](/developer/tools/)
-    * [Events](/developer/events/)
-    * [Opera Dragonfly](/dragonfly/)
-    * [Web Standards Curriculum](/developer/wsc/)
-    * [Web specifications support in Opera](/docs/specs/)
-    * [Dev Opera](http://dev.opera.com/)
-  * [Company](/company/)
-    * [Business solutions](/business/)
-    * [About Opera](/company/)
-    * [Press](/press/)
-    * [Jobs](/company/jobs/)
-    * [Investors](/company/investors/)
-    * [State of the Mobile Web](/smw/)
-    * [State of Mobile Advertising](/sma/)
-    * [Events](/company/events/)
-    * [Contact](/company/contact/)
-  * [Support](/support/)
-
-# [ Opera Software ASA ](/)
-
-##  Opera Link  API Beta
+# [ Opera Link API Beta ](http://www.opera.com/docs/apis/linkrest/)
 
 _Last update: 2012-06-14_
 
 On this page...
 
-    Overview
-    Forming requests
-    Accessing data
-    Mutating data
+* [Overview](#overview)
+  * [Forming requests](#forming-requests)
+  * [Accessing data](#accessing-data)
+  * [Mutating data](#mutating-data)
 
-      
-Importing structured data
+* [Importing structured data](#importing-structured-data)
+  * [Datatype information](#datatype-information)
+  * [Target folders](#target-folders)
+  * [Receiving responses](#receiving-responses)
 
-    Datatype information
-    Target folders
-    Receiving responses
+* [Authentication](#authentication)
 
-      
-Authentication
-
-###  Overview
+##  Overview
 
 The REST API for Opera Link is intended to provide read and write access to a
 user's Opera Link data storage over an ` HTTP` interface. The API is similar
@@ -126,9 +83,7 @@ All other parameters sent in the request that are not recognized will be
 silently ignored. They will not be processed, will not raise any errors, and
 will not influence the request in any way.
 
-Top
-
-###  Accessing data: all `HTTP GET` requests
+##  Accessing data: all `HTTP GET` requests
 
 For example, a simple GET request to fetch the properties of a bookmark with
 `id 319A38DB4581426DA48CAB58C2528FD4` will look like this:
@@ -154,7 +109,7 @@ and note datatype `/children/` and `/descendants/` suffixes query about a root
 folder of the tree structure. To get a list of all dials on the Speed Dial
 page, `item_id` should be skipped and the suffix `/children/` should be used.
 
-###  Mutating data: `POST`, `PUT`, and `DELETE` requests
+##  Mutating data: `POST`, `PUT`, and `DELETE` requests
 
 In a REST interface, HTTP methods result in their expected behavior:
 
@@ -221,7 +176,7 @@ values:
 
   * The moved item, as it would be returned by a `get` request
 
-####  Input formats
+###  Input formats
 
 The Opera Link API supports input in different formats. Apart from the default
 `x-www-form-urlencoded` input, you can send `POST` requests with XML or JSON
@@ -255,9 +210,7 @@ These three inputs are equivalent:
     </request>
     
 
-Top
-
-###  Importing structured data
+##  Importing structured data
 
 In order to make importing larger amounts of items faster and easier, some
 datatypes support an extra `import` method. Currently you can use it for
@@ -276,7 +229,7 @@ Importing of structured data via a `POST` request is done to this address:
     https://link.api.opera.com/rest/<datatype>/(<folder_id>/)import/
     
 
-####  JSON (JavaScript Object Notation) import format
+###  JSON (JavaScript Object Notation) import format
 
 Importing of structured data via JSON (JavaScript Object Notation) is done in
 this format:
@@ -316,7 +269,7 @@ this format:
     ]
     
 
-####  XML import format
+###  XML import format
 
 Importing of structured data via XML is done in this format:
 
@@ -355,16 +308,14 @@ Importing of structured data via XML is done in this format:
     </request>
     
 
-Top
-
-###  Datatype information
+##  Datatype information
 
 Although most operations in the Opera Link API are consistent throughout the
 different types of data stored in the system, some extra policies are enforced
 on some of them to keep consistency with your desktop and mobile clients.
 Below, you can see detailed descriptions of the specifics of every datatype.
 
-####  Bookmarks
+###  Bookmarks
 
 Bookmarks support all the functionality described in the API, including
 container items (folders), trash folder, and automatic creation of unique
@@ -406,7 +357,7 @@ identifiers. The defined item types for this datatype are:
 
   * This item has no usable properties.
 
-####  Notes
+###  Notes
 
 Notes support all the functionality described in the API, including container
 items (folders), trash folder, and automatic creation of unique identifiers.
@@ -435,7 +386,7 @@ The defined item types for this datatype are:
 
   * This item has no usable properties.
 
-####  Search engines
+###  Search engines
 
 Search Engines are not a structured data type; there is no ordering or
 nesting. The supported operations are:
@@ -463,7 +414,7 @@ The only defined item type for this datatype is:
   * **`show_in_personal_bar`:** tells the browser to show the item in the personal bar
   * **`personal_bar_pos`:** tells the browser which position in the personal bar this item should be shown: _only valid if `show_in_personal_bar` is `true`, otherwise it is usually set to `-1`_
 
-####  Speed Dial
+###  Speed Dial
 
 Speed Dial as a data type behaves slightly differently. Its items do not get
 automatically generated IDs assigned and do not support some of the
@@ -490,7 +441,7 @@ The only defined item type for this datatype is:
   * **`reload_interval`:** tells the browser how many seconds it should wait between reloads: _ignored if `reload_enabled` is not `true`_
   * **`reload_only_if_expired`:** tells the browser to only reload automatically if the site has changed: _ ignored if `reload_enabled` is not `true`_
 
-####  Url filters
+###  Url filters
 
 Url Filters are not a structured data type; there is no ordering or nesting.
 The supported operations are:
@@ -514,16 +465,14 @@ The only defined item type for this datatype is:
 A quick description of the url filter format can be found at: [ Opera's Kiosk
 Mode: URL filtering](http://www.opera.com/support/mastering/kiosk/#url-filter)
 
-Top
-
-###  Target folders
+##  Target folders
 
 Target folders are special folders that contain extra properties, related to
 their special use in some devices. Typically there is some device with limited
 capabilities that sees the content of those folders as the only content
 available. The only currently defined target is "mini".
 
-####  Target properties
+###  Target properties
 
 The properties of target folders describe certain rules related to their
 proper usage. They are just hints for the clients and are not enforced by the
@@ -546,7 +495,7 @@ only to the target folder itself, but to any subfolder inside it.
 
      This specifies the maximum number of items that can be contained within this folder. The special value `0` indicates no limit.
 
-###  Timestamp format specification
+##  Timestamp format specification
 
 Created and visited properties should have the timestamp format specified by [
 RFC 3339 - Date and Time on the Internet:
@@ -556,13 +505,13 @@ timestamp is:
     
     2010-07-22T05:40:59Z
 
-###  Receiving Responses
+##  Receiving Responses
 
 The Link API uses HTTP status codes in its responses. In the case of a
 successful request, a `200 OK` response will contain the requested data. All
 other response codes will not have a message body.
 
-####  Response codes
+###  Response codes
 
 Below is a list of all used HTTP status codes:
 
@@ -588,7 +537,7 @@ Below is a list of all used HTTP status codes:
 
      You are trying to execute a method that is not implemented. This can happen when you execute a method that is not supported by the specific datatype or if you misspelled a method name in the request.
 
-####  Response structure
+###  Response structure
 
 All responses have an unified structure, regardless of the format in which
 they are presented. Every response contains a list of resources that
@@ -605,7 +554,7 @@ within each item. All properties are datatype specific and their number can be
 different for each item. Empty properties are considered to be missing and
 will not be returned.
 
-#####  Choosing the output format
+####  Choosing the output format
 
 There are currently two supported output formats: JSON and XML. By default the
 API will reply with the `Content-Type` used for the request, or with JSON if
@@ -622,7 +571,7 @@ The order in which the different possibilities are evaluated is:
 
   * `api_output` parameter > Accept header > Content-type header > Default (JSON)
 
-#####  JSON (JavaScript Object Notation) Response Format
+####  JSON (JavaScript Object Notation) Response Format
 
 If nothing else is specified, the REST API will return response data in JSON
 format, which is the default output format for the system. The response is a
@@ -645,7 +594,7 @@ an example of JSON output:
     ]
     
 
-#####  XML Response Format
+####  XML Response Format
 
 The Opera Link API supports output in XML format. This output can be requested
 using the methods described above. The root of the document is an element that
@@ -665,10 +614,7 @@ The following markup is an example of XML output:
       </resource>
     </response>
     
-
-Top
-
-###  Authentication
+##  Authentication
 
 Since the requests are stateless, every request MUST contain authentication
 information. If authentication information is not provided, the server will
@@ -687,7 +633,7 @@ unavailable as of Opera 12.50. More information about this is available
 [here](http://my.opera.com/addons/blog/2012/04/24/sunsetting-unite-and-
 widgets).
 
-####  OAuth parameters
+###  OAuth parameters
 
 To obtain the necessary tokens, go to [https://auth.opera.com/service/oauth/ap
 plications/](https://auth.opera.com/service/oauth/applications/). You can find
@@ -723,104 +669,7 @@ For more details about OAuth authentication and examples in Perl and Python,
 you can visit our [ OAuth examples
 page](http://www.opera.com/docs/apis/linkrest/oauthexamples/).
 
-Top
-
-### Support
-
-  * [Overview](/support/)
-  * [Tutorials](/support/tutorials/)
-  * [Online communities](/support/community/)
-  * [ Reporting bugs ](/support/bugs/)
-  * [Opera Web Mail](/support/webmail/)
-  * [Access Opera](/support/access/)
-  * [ Documentation ](/docs/)
-    * [Opera Extensions APIs](/docs/apis/extensions/)
-    * [ Opera Link REST API ](/docs/apis/linkrest/)
-      * [OAuth examples](/docs/apis/linkrest/oauthexamples/)
-    * [ Web specifications support ](/docs/specs/)
-    * [Version history](/docs/history/)
-    * [ Changelogs ](/docs/changelogs/)
-    * [Browser JavaScript](/docs/browserjs/)
-    * [Command Line options](/docs/switches/)
-    * [Kiosk mode](/support/mastering/kiosk/)
-    * [Opera.ini](/support/usingopera/operaini/)
-    * [ Plug-ins ](/docs/plugins/)
-    * [ Linux Plug-ins ](/docs/linux/plugins/)
-    * [Root certificates](/docs/ca/)
-    * [Sysadmin handbook](/support/mastering/sysadmin/)
-    * [User CSS](/docs/usercss/)
-    * [ User JavaScript ](/docs/userjs/)
-
-### Opera Help
-
-Need help? Hit F1 anytime while using Opera to access our online help files,
-or [go here](/support/).
-
-  * [Opera](/) » 
-  * [ Support ](/support/) » 
-  * [ Documentation ](/docs/) » 
-  * ** Opera Link REST API **
-
-  * ##### Get Opera
-
-  * [Windows, Mac & Linux](/browser/download/)
-  * [Mobile phones](/mobile/download/)
-  * [Tablets](/mobile/download/)
-  * ##### Add-ons
-
-  * [Opera Link](/link/)
-  * [Opera Mail](/mail/)
-  * [Opera Turbo](/browser/turbo/)
-  * [Opera extensions](/addons/extensions/)
-  * ##### Company
-
-  * [About Opera](/company/)
-  * [Jobs](/company/jobs/)
-  * [Investors](/company/investors/)
-  * [Executive team](/company/executive/)
-  * [Events](/company/events/)
-  * ##### Press
-
-  * [Press releases](/press/releases/)
-  * [Press resources](/press/resources/)
-  * [Opera Video](/press/video/)
-  * [Fast facts](/press/facts/)
-  * [FAQ](/press/faq/)
-  * [SMW report](/smw/)
-  * ##### Business
-
-  * [Overview](/business/)
-  * [Network operators](/business/operators/)
-  * [Mobile OEMs](/business/mobile/)
-  * [Device OEMs](/business/devices/)
-  * [Advertising](/business/content/)
-  * [Newsletter](/business/newsletter/)
-  * ##### Useful links
-
-  * [Support](/support/)
-  * [Documentation](/docs/)
-  * [Knowledge base](/support/kb/)
-  * [Site map](/index/)
-  * [Jobs](/company/jobs/)
-  * [Contact](/company/contact/)
-
-  * [](http://my.opera.com/)
-  * [](http://www.youtube.com/user/operasoftware)
-  * [](http://www.facebook.com/Opera)
-  * [](http://twitter.com/opera)
-
-Search www.opera.com
-
-EnglishالعربيةDeutschEspañol LatinoFrançaisBahasa Indonesia日本語PolskiPortuguês
-(Brasil)РусскийTiếng Việt简体中文繁體中文
-
 Copyright © 2012 [Opera Software ASA](http://www.opera.com/). All rights
-reserved. [Privacy](/privacy/).
+reserved. 
 
 More than **270 million** users worldwide
-
-  *[SMW]: State of mobile Web
-  *[ASA]: Allmennaksjeselskap
-  *[FAQ]: Frequently asked questions
-  *[ API]: Application Programming Interface
-
