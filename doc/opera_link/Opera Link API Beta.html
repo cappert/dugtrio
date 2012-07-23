@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta name="author" content="Frank M. Palinkas, Technical Writer">
+	<meta name="description" content="Opera: Opera Link API Beta">
+	<link rel="icon" href="http://www.opera.com/bitmaps/common/speed_dial-icon.png" type="image/png">
+	<link rel="apple-touch-icon" href="http://www.opera.com/bitmaps/common/touch-icon.png" type="image/png">
+	<link rel="shortcut icon" href="http://www.opera.com/favicon.ico" type="image/x-icon">
+	<link type="text/css" rel="stylesheet" href="html_files/sh_style.css">
+
+	<title>Opera: Opera Link API Beta</title>
+	<link rel="stylesheet" href="html_files/screen.css" type="text/css" media="screen,projection,tv">
+	<link rel="stylesheet" href="html_files/handheld.css" type="text/css" media="handheld">
+	<link rel="stylesheet" href="html_files/print.css" type="text/css" media="print">
+	<link rel="stylesheet" href="html_files/support.css" type="text/css" media="screen,projection,tv">
+	<style type="text/css" media="screen,projection">
+		.default-bullets {
+		  list-style: disc;
+		}
+	  </style>
+	</head>
+
+<body id="support">
+	<div id="page">
+		<div id="nav">
+			<p class="yank"><a href="#brand">[Skip to content]</a></p>
+			<ul id="mainmenu">
+				<li class="home"><a href="http://www.opera.com/"><span>Home</span></a> </li>
+				<li class="products"><a href="http://www.opera.com/products/"><span>Browsers</span></a>
+					<ul class="hide-mobile">
+						<li><a href="http://www.opera.com/browser/">Opera for Windows, Mac &amp; Linux</a></li>
+						<li><a href="http://www.opera.com/mobile/">Opera for phones</a></li>
+						<li><a href="http://www.opera.com/mobile/features/tablets/">Opera for tablets</a></li>
+						<li class=""><a href="http://www.opera.com/download/">Download Opera</a></li>
+				  </ul>
+				</li>
+				<li class="addons"><a href="http://addons.opera.com/"><span>Add-ons</span></a>
+					<ul class="hide-mobile">
+						<li><a href="https://addons.opera.com/extensions/">Opera extensions</a></li>
+						<li><a href="https://addons.opera.com/themes/">Opera themes</a></li>
+						<li><a href="http://www.opera.com/link/">Opera Link</a></li>
+						<li><a href="http://www.opera.com/mail/">Opera Mail</a></li>
+						<li><a href="http://www.opera.com/browser/turbo/">Opera Turbo</a></li>
+					</ul> 
+				</li>
+				<li class="community"><a href="http://www.opera.com/community/"><span>Community</span></a>
+					<ul class="hide-mobile">
+						<li><a href="http://my.opera.com/community/">My Opera</a></li>
+						<li><a href="http://my.opera.com/chooseopera/blog/">Opera news blog</a></li>
+						<li><a href="http://www.opera.com/company/education/">Education</a></li>
+						<li><a href="http://my.opera.com/community/forums/">Forums</a></li>
+					</ul>
+				</li>
+				<li class="developer"><a href="http://www.opera.com/developer/"><span>Developer</span></a>
+					<ul class="hide-mobile">
+						<li><a href="http://www.opera.com/developer/tools/">Developer tools</a></li>
+						<li><a href="http://www.opera.com/developer/events/">Events</a></li>
+						<li><a href="http://www.opera.com/dragonfly/">Opera Dragonfly</a></li>
+						<li><a href="http://www.opera.com/developer/wsc/">Web Standards Curriculum</a></li>
+						<li><a href="http://www.opera.com/docs/specs/">Web specifications support in Opera</a></li>
+						<li><a href="http://dev.opera.com/">Dev Opera</a></li>
+					</ul>
+				</li>
+				<li class="company"><a href="http://www.opera.com/company/"><span>Company</span></a>
+					<ul class="hide-mobile">
+						<li><a href="http://www.opera.com/business/">Business solutions</a></li>
+						<li><a href="http://www.opera.com/company/">About Opera</a></li>
+						<li><a href="http://www.opera.com/press/">Press</a></li>
+						<li><a href="http://www.opera.com/company/jobs/">Jobs</a></li>
+						<li><a href="http://www.opera.com/company/investors/">Investors</a></li>
+						<li><a href="http://www.opera.com/smw/">State of the Mobile Web</a></li>
+						<li><a href="http://www.opera.com/sma/">State of Mobile Advertising</a></li>
+						<li><a href="http://www.opera.com/company/events/">Events</a></li>
+						<li><a href="http://www.opera.com/company/contact/">Contact</a></li>
+					</ul>
+				</li>
+				<li class="support on"><a href="http://www.opera.com/support/" title="Support">Support</a>
+				</li>
+			</ul>
+				<h1 id="brand"><a href="http://www.opera.com/">Opera Software ASA</a></h1></div><div class="section"><div class="article">
+  <h2> Opera Link <abbr title="Application Programming Interface"> API</abbr> Beta</h2>
+  <p><em>Last update: 2012-06-14</em></p>
+  <div class="span-4">
+    <dl>
+      <dt>On this page...</dt>
+      <dd><a href="#over">Overview</a></dd>
+      <dd><a href="#forming">Forming requests</a></dd>
+      <dd><a href="#access">Accessing data</a></dd>
+      <dd><a href="#mutate">Mutating data</a></dd>
+    </dl>
+  </div>
+  <div class="span-4">
+    <dl>
+      <dd><br><a href="#import">Importing structured data</a></dd>
+      <dd><a href="#datatypeinfo">Datatype information</a></dd>
+      <dd><a href="#target">Target folders</a></dd>
+      <dd><a href="#receive">Receiving responses</a></dd>
+    </dl>
+  </div>
+  <div class="span-4">
+    <dl>
+      <dd><br><a href="#auth">Authentication</a><br></dd>
+    </dl>
+  </div>
+  <h3 class="separator clear" id="over"> Overview</h3>
+  <p> The REST API for Opera Link is intended to provide read and write access to a user's Opera Link data storage over an <code> HTTP</code> interface. The API is similar to the APIs of popular web services and should be fairly straightforward to use.</p>
+  <p> All <code>HTTP</code> methods are supported and work as expected—<code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code>. If you are uncomfortable with or cannot use the less typical methods <code>PUT</code> and <code>DELETE</code>, you can still use the API fully, by specifying actions using a parameter in a standard <code>POST</code> request.</p>
+  <p><code>GET</code> requests are exclusively read-only; that is, the 
+request will not have any side-effects and will never change the state 
+of the requested item on the server. <code>POST</code>, <code>PUT</code>, and <code>DELETE</code>
+ requests are exclusively for modifying user data; they will always 
+result in modification of the user data, given that they are successful.</p>
+  <p> The REST API requests are stateless and complete—no mechanisms are
+ used to track progress of an action beyond the scope of a single 
+request.</p>
+  <p> The REST API exposes and manipulates the following data types:</p>
+  <ul class="default-bullets">
+    <li>Bookmarks</li>
+    <li>Notes</li>
+    <li>Speed Dial</li>
+  </ul>
+  <p> Other data types and further functionality may be included in further releases.</p>
+  <h3 id="forming" class="separator"> Forming requests</h3>
+  <p> All REST requests will have the following URI pattern:</p>
+<pre>https://link.api.opera.com/rest/&lt;datatype&gt;/(&lt;item_id&gt;)
+</pre>
+  <dl>
+    <dt><code>datatype</code></dt>
+    <dd> This is one of the datatypes stored in Opera Link: "<code>bookmark</code>", "<code>speeddial</code>", "<code>note</code>" and similar.</dd>
+    <dt><code>item_id</code></dt>
+    <dd> When used, this would signify the unique identifier by which a specific item in the system is referenced.</dd>
+  </dl>
+  <p> All requests have a list of required parameters and can be categorized into three groups:</p>
+  <ol>
+    <li><b>Authentication parameters</b>
+      <ul class="default-bullets">
+        <li>These are used to authorise access and identify the user data.</li>
+        <li>They are required parameters in every request.</li>
+        <li>See the "<a href="#auth">Authentication</a>" section for details.</li>
+      </ul>
+    </li>
+    <li><b>API parameters</b>
+      <ul class="default-bullets">
+        <li>These are used to specify the details of the request and desired response settings.</li>
+        <li>These methods are always prefixed with the <code>string api_</code> as in the following items:
+          <ul class="default-bullets">
+            <li><b><code>api_method</code></b> (optional, POST-only): 
+This parameter explicitly specifies the method you want to execute and 
+overrides the default create action.</li>
+            <li><b><code>api_output</code></b> (optional): This 
+specifies the output format for the responses. It overrides any other 
+methods for specifying the output. See the following section "<a href="#choosing">Choosing the output format</a>" for more details.</li>
+            </ul>
+        </li>
+      </ul>
+    </li>
+    <li><b>Method parameters</b>
+      <ul class="default-bullets">
+        <li>These parameters are additional data needed for the completion of the requests.</li>
+        <li>They are dependent on the method and/or the datatype being 
+manipulated and are usually datatype-related values - titles, 
+descriptions, positions, etc.</li>
+        <li>These parameters are clarified in each method's description.</li>
+      </ul>
+    </li>
+  </ol>
+  <p> All other parameters sent in the request that are not recognized 
+will be silently ignored. They will not be processed, will not raise any
+ errors, and will not influence the request in any way.</p>
+  <p><a href="#support" class="top">Top</a></p>
+  <h3 id="access" class="separator"> Accessing data: all <code>HTTP GET</code> requests</h3>
+  <p> For example, a simple GET request to fetch the properties of a bookmark with <code>id 319A38DB4581426DA48CAB58C2528FD4</code> will look like this:</p>
+<pre>GET https://link.api.opera.com/rest/bookmark/319A38DB4581426DA48CAB58C2528FD4/ HTTP/1.1
+</pre>
+  <dl>
+    <dt>Direct item request</dt>
+    <dd> This returns the properties of the requested item.</dd>
+    <dt><code>/children/</code></dt>
+    <dd> This returns all children of the item requested in the URI. The
+ method is not recursive and will not return any sub-items. If the node 
+does not have any contained items, or by definition cannot contain any 
+items, this call will return an empty list.</dd>
+    <dt><code>/descendants/</code></dt>
+    <dd> This returns all descendants of the item requested in the URI, 
+recursively. All entries that contain another level of items within 
+themselves will encapsulate them in a children property. Keep in mind 
+that a full tree of contained items can be prohibitively big in some 
+situations.</dd>
+    <dd> If the node does not have any contained items, or by definition cannot contain any items, this call will return an empty list.</dd>
+  </dl>
+  <p> If the <code>item_id</code> part of the URI is skipped in a request, then for bookmark and note datatype <code>/children/</code> and <code>/descendants/</code> suffixes query about a root folder of the tree structure. To get a list of all dials on the Speed Dial page, <code>item_id</code> should be skipped and the suffix <code>/children/</code> should be used.</p>
+  <h3 id="mutate" class="separator"> Mutating data: <code>POST</code>, <code>PUT</code>, and <code>DELETE</code> requests</h3>
+  <p> In a REST interface, HTTP methods result in their expected behavior:</p>
+  <ul class="default-bullets">
+    <li><b><code>POST</code></b> for creating new items. See the method <code>create</code> below.</li>
+    <li><b><code>PUT</code></b> for updating existing items. See the method <code>update</code> below.</li>
+    <li><b><code>DELETE</code></b> for removing existing items. See the method <code>delete</code> below.</li>
+  </ul>
+  <p> Since not all libraries support HTTP methods that are different 
+from GET and POST and since the Link API provides additional methods of 
+manipulating the Opera Link data, the API provides an extra interface 
+for specifying which operation you want to execute. This is done via a 
+POST request through the addition of a parameter called <code>api_method</code>. It can take any of the following values:</p>
+  <dl>
+    <dt><code>create</code></dt>
+    <dd> This creates a new item of the datatype specified in the URI. 
+The request must contain all values mandated by that datatype. This 
+method has a few datatype-specific differences, which are further 
+described in the "<a href="#datatypeinfo">Datatype information</a>" section. Generally, when creating a new item, the item will be returned in the response with a new unique identifier as <code>id</code>. You need this identifier if you want to further manipulate the item. If an <code>item_id</code>
+ is specified in the URI, the system will attempt to create the new item
+ under the one specified in the URI. If that item is a trailing node, 
+which cannot contain any children, this method will fail.</dd>
+    <dd>
+      <b>Required parameters:</b>
+      <ul class="default-bullets">
+        <li><tt>item_type</tt>: This is the type of the object being created; for example <code>bookmark, bookmark_folder, bookmark_separator, speeddial</code>, etc.</li>
+        <li>Datatype specific parameters: see each data type description for details.</li>
+      </ul>
+    </dd>
+    <dd>
+      <b>Returns:</b>
+      <ul class="default-bullets">
+        <li>The newly added item, as it would be returned by a <code>get</code> request</li>
+      </ul>
+    </dd>
+  </dl>
+  <dl>
+    <dt><code>delete</code></dt>
+    <dd> This means the item is permanently and irrecoverably removed 
+from the system. If the item does not exist, the request will succeed, 
+and the response will be "200 OK". In the case of a request to delete 
+trash folder, the "400 Bad Request" error is raised.</dd>
+    <dd>
+      <b>Required Parameters:</b>
+      <ul class="default-bullets">
+        <li>None</li>
+      </ul>
+    </dd>
+    <dd>
+      <b>Returns:</b>
+      <ul class="default-bullets">
+        <li>204 Deleted</li>
+      </ul>
+    </dd>
+  </dl>
+  <dl>
+    <dt><code>trash</code></dt>
+    <dd> This moves the item to the trash container of this datatype. 
+This method is not defined for datatypes that have no notion of trash 
+folders—for example, in the case of Speed Dial, search engines and typed
+ history items. In the case of a request with action trash on trash 
+folder, the "400 Bad Request" error is raised.</dd>
+    <dd>
+      <b>Required Parameters</b>:
+      <ul class="default-bullets">
+        <li>None</li>
+      </ul>
+    </dd>
+    <dd><b>Returns</b>:
+      <ul class="default-bullets">
+        <li>The moved item, as it would be returned by a <code>get</code> request</li>
+      </ul>
+    </dd>
+  </dl>
+  <dl>
+    <dt><code>update</code></dt>
+    <dd> This modifies the contents of the item. Note that this method 
+does not require parameters to function; however it will only process 
+parameters that are accepted by the specific datatype. See the "<a href="#datatypeinfo">Datatype information</a>"
+ section for more details. If you want to remove a specific property of 
+an item completely, send an empty value for it; empty properties are 
+considered missing and will be removed. If read-only parameters are sent
+ with changed values, then the action results in a "400 Bad Request" 
+error.</dd>
+    <dd><b>Required Parameters</b>:
+      <ul class="default-bullets">
+        <li>None</li></ul>
+    </dd>
+    <dd>
+      <b>Returns</b>:
+      <ul class="default-bullets">
+        <li>The updated item, as it would be returned by a <code>get</code> request</li>
+      </ul>
+    </dd>
+  </dl>
+  <dl>
+    <dt><code>move</code></dt>
+    <dd> This moves the item to a different position in the structures 
+of the datatype, relative to a given reference item. Relative position "<code>into</code>"
+ moves the item to the end of the reference item's list of children (if 
+the reference item is not a folder, or is a subfolder of the element to 
+be moved, a 400 Bad Request is returned). Use an empty string as <tt>reference_item</tt> to move an item to the root folder. The relative position "<code>before</code>" moves the element before the reference item. Likewise, the relative position "<code>after</code>"
+ moves the element after the reference item. If there is no item with 
+the given reference ID, then error 404 Not Found is returned. </dd>
+    <dd><b>Required Parameters</b>:
+      <ul class="default-bullets">
+        <li><b><code>reference_item</code></b>: The ID of the item being a point of reference to the new location of the moved element</li>
+        <li><b><code>relative_position</code></b>: One of the values <code>into</code>, <code>after</code>, and <code>before</code></li>
+      </ul>
+    </dd>
+    <dd><b>Returns</b>:
+      <ul class="default-bullets">
+        <li>The moved item, as it would be returned by a <code>get</code> request</li>
+      </ul>
+    </dd>
+  </dl>
+  <h4> Input formats</h4>
+  <p> The Opera Link API supports input in different formats. Apart from the default <code>x-www-form-urlencoded</code> input, you can send <code>POST</code> requests with XML or JSON serialized data as well. The API will automatically detect and process the input, based on the <code>Content-Type</code> header of the request.</p>
+  <p> These three inputs are equivalent:</p>
+  <ul class="default-bullets">
+    <li><b>Content-Type: <code>application/x-www-form-urlencoded</code></b>
+<pre>?item_type=bookmark&amp;title=MyOpera&amp;uri=www.myopera.com
+</pre></li>
+    <li><b>Content-Type: <code>application/json</code></b>
+<pre class="sh_javascript sh_sourceCode"><span class="sh_cbracket">{</span>
+    <span class="sh_string">"item_type"</span><span class="sh_symbol">:</span> <span class="sh_string">"bookmark"</span><span class="sh_symbol">,</span>
+    <span class="sh_string">"title"</span><span class="sh_symbol">:</span> <span class="sh_string">"MyOpera"</span><span class="sh_symbol">,</span>
+    <span class="sh_string">"uri"</span><span class="sh_symbol">:</span> <span class="sh_string">"www.myopera.com"</span>
+<span class="sh_cbracket">}</span></pre></li>
+    <li><b>Content-Type: <code>application/xml</code></b>
+<pre class="sh_xml sh_sourceCode"><span class="sh_keyword">&lt;request&gt;</span>
+  <span class="sh_keyword">&lt;item_type&gt;</span>bookmark<span class="sh_keyword">&lt;/item_type&gt;</span>
+  <span class="sh_keyword">&lt;title&gt;</span>MyOpera<span class="sh_keyword">&lt;/title&gt;</span>
+  <span class="sh_keyword">&lt;uri&gt;</span>www.myopera.com<span class="sh_keyword">&lt;/uri&gt;</span>
+<span class="sh_keyword">&lt;/request&gt;</span>
+</pre></li>
+  </ul>
+  <p><a href="#support" class="top">Top</a></p>
+  <h3 class="separator" id="import"> Importing structured data</h3>
+  <p> In order to make importing larger amounts of items faster and easier, some datatypes support an extra <code>import</code>
+ method. Currently you can use it for bookmarks, notes, and url filters.
+ This method allows you to import large amounts of items as a single 
+operation.</p>
+  <p> Since you need to submit structured data (lists or trees) to the API, the import methods <i>cannot</i> be made with <code> x-www-form-urlencoded</code> input, but <i>only</i> with XML or JSON data. The input format matches the output format described in the <a href="#choosing">"Choosing the output format"</a> section.</p>
+  <p> Importing of structured data via a <code>POST</code> request is done to this address:</p>
+<pre>https://link.api.opera.com/rest/&lt;datatype&gt;/(&lt;folder_id&gt;/)import/
+</pre>
+  <h4> JSON (JavaScript Object Notation) import format</h4>
+  <p> Importing of structured data via JSON (JavaScript Object Notation) is done in this format:</p>
+<pre class="sh_javascript sh_sourceCode"><span class="sh_symbol">[</span>
+    <span class="sh_cbracket">{</span>
+        <span class="sh_string">"item_type"</span><span class="sh_symbol">:</span> <span class="sh_string">"bookmark"</span><span class="sh_symbol">,</span>
+        <span class="sh_string">"properties"</span><span class="sh_symbol">:</span> <span class="sh_cbracket">{</span>
+            <span class="sh_string">"uri"</span><span class="sh_symbol">:</span> <span class="sh_string">"http://duckduckgo.com/"</span><span class="sh_symbol">,</span>
+            <span class="sh_string">"title"</span><span class="sh_symbol">:</span> <span class="sh_string">"DuckDuckGo"</span>
+            <span class="sh_cbracket">}</span>
+    <span class="sh_cbracket">}</span><span class="sh_symbol">,</span>
+    <span class="sh_cbracket">{</span>
+        <span class="sh_string">"item_type"</span><span class="sh_symbol">:</span> <span class="sh_string">"bookmark_folder"</span><span class="sh_symbol">,</span>
+        <span class="sh_string">"properties"</span><span class="sh_symbol">:</span> <span class="sh_cbracket">{</span>
+            <span class="sh_string">"title"</span><span class="sh_symbol">:</span> <span class="sh_string">"Opera"</span>
+            <span class="sh_cbracket">}</span><span class="sh_symbol">,</span>
+        <span class="sh_string">"children"</span><span class="sh_symbol">:</span> <span class="sh_symbol">[</span>
+            <span class="sh_cbracket">{</span>
+                <span class="sh_string">"item_type"</span><span class="sh_symbol">:</span> <span class="sh_string">"bookmark"</span><span class="sh_symbol">,</span>
+                <span class="sh_string">"properties"</span><span class="sh_symbol">:</span> <span class="sh_cbracket">{</span>
+                    <span class="sh_string">"uri"</span><span class="sh_symbol">:</span> <span class="sh_string">"http://www.opera.com"</span><span class="sh_symbol">,</span>
+                    <span class="sh_string">"title"</span><span class="sh_symbol">:</span> <span class="sh_string">"Opera - The Fastest Internet Browser"</span>
+                    <span class="sh_cbracket">}</span><span class="sh_symbol">,</span>
+            <span class="sh_cbracket">}</span><span class="sh_symbol">,</span>
+            <span class="sh_cbracket">{</span>
+                <span class="sh_string">"item_type"</span><span class="sh_symbol">:</span> <span class="sh_string">"bookmark"</span><span class="sh_symbol">,</span>
+                <span class="sh_string">"properties"</span><span class="sh_symbol">:</span> <span class="sh_cbracket">{</span>
+                    <span class="sh_string">"uri"</span><span class="sh_symbol">:</span> <span class="sh_string">"www.myopera.com"</span><span class="sh_symbol">,</span>
+                    <span class="sh_string">"title"</span><span class="sh_symbol">:</span> <span class="sh_string">"My Opera"</span>
+                    <span class="sh_cbracket">}</span>
+            <span class="sh_cbracket">}</span>
+        <span class="sh_symbol">]</span>
+    <span class="sh_cbracket">}</span>
+<span class="sh_symbol">]</span>
+</pre>
+  <h4> XML import format</h4>
+  <p> Importing of structured data via XML is done in this format:</p>
+<pre class="sh_xml sh_sourceCode"><span class="sh_keyword">&lt;request&gt;</span>
+  <span class="sh_keyword">&lt;resource&gt;</span>
+    <span class="sh_keyword">&lt;item_type&gt;</span>bookmark<span class="sh_keyword">&lt;/item_type&gt;</span>
+    <span class="sh_keyword">&lt;properties&gt;</span>
+      <span class="sh_keyword">&lt;uri&gt;</span>www.google.com<span class="sh_keyword">&lt;/uri&gt;</span>
+      <span class="sh_keyword">&lt;title&gt;</span>Google Search<span class="sh_keyword">&lt;/title&gt;</span>
+    <span class="sh_keyword">&lt;/properties&gt;</span>
+  <span class="sh_keyword">&lt;/resource&gt;</span>
+  <span class="sh_keyword">&lt;resource&gt;</span>
+    <span class="sh_keyword">&lt;item_type&gt;</span>bookmark_folder<span class="sh_keyword">&lt;/item_type&gt;</span>
+    <span class="sh_keyword">&lt;properties&gt;</span>
+      <span class="sh_keyword">&lt;title&gt;</span>Opera<span class="sh_keyword">&lt;/title&gt;</span>
+    <span class="sh_keyword">&lt;/properties&gt;</span>
+    <span class="sh_keyword">&lt;children&gt;</span>
+      <span class="sh_keyword">&lt;resource&gt;</span>
+        <span class="sh_keyword">&lt;item_type&gt;</span>bookmark<span class="sh_keyword">&lt;/item_type&gt;</span>
+        <span class="sh_keyword">&lt;properties&gt;</span>
+          <span class="sh_keyword">&lt;title&gt;</span>Opera Software<span class="sh_keyword">&lt;/title&gt;</span>
+          <span class="sh_keyword">&lt;uri&gt;</span>http://opera.com<span class="sh_keyword">&lt;/uri&gt;</span>
+        <span class="sh_keyword">&lt;/properties&gt;</span>
+      <span class="sh_keyword">&lt;/resource&gt;</span>
+      <span class="sh_keyword">&lt;resource&gt;</span>
+        <span class="sh_keyword">&lt;item_type&gt;</span>bookmark<span class="sh_keyword">&lt;/item_type&gt;</span>
+        <span class="sh_keyword">&lt;properties&gt;</span>
+          <span class="sh_keyword">&lt;title&gt;</span>Opera Community<span class="sh_keyword">&lt;/title&gt;</span>
+          <span class="sh_keyword">&lt;uri&gt;</span>http://www.my.opera.com/<span class="sh_keyword">&lt;/uri&gt;</span>
+        <span class="sh_keyword">&lt;/properties&gt;</span>
+      <span class="sh_keyword">&lt;/resource&gt;</span>
+    <span class="sh_keyword">&lt;/children&gt;</span>
+  <span class="sh_keyword">&lt;/resource&gt;</span>
+<span class="sh_keyword">&lt;/request&gt;</span>
+</pre>
+  <p><a href="#support" class="top">Top</a></p>
+  <h3 id="datatypeinfo" class="separator"> Datatype information</h3>
+  <p> Although most operations in the Opera Link API are consistent 
+throughout the different types of data stored in the system, some extra 
+policies are enforced on some of them to keep consistency with your 
+desktop and mobile clients. Below, you can see detailed descriptions of 
+the specifics of every datatype.</p>
+  <h4> Bookmarks</h4>
+  <p> Bookmarks support all the functionality described in the API, 
+including container items (folders), trash folder, and automatic 
+creation of unique identifiers. The defined item types for this datatype
+ are:</p>
+  <dl>
+    <dt><code>bookmark</code></dt>
+    <dd> Properties:
+      <ul class="default-bullets">
+        <li><b><code>title</code>:</b> self-explanatory <b>[Required]</b></li>
+        <li><b><code>uri</code>:</b> self-explanatory <b>[Required]</b></li>
+        <li><b><code>description</code>:</b> the bookmark's long description</li>
+        <li><b><code>nickname</code>:</b> the browser shortcut for quick access from the address bar</li>
+        <li><b><code>icon</code>:</b> base64-encoded, PNG favicon</li>
+        <li><b><code>created</code>:</b> creation timestamp (default - current timestamp)
+          <ul class="default-bullets">
+            <li>See the <a href="#time_format">explanation on the timestamp format</a></li>
+          </ul>
+        </li>
+        <li><b><code>visited</code>:</b> last visited timestamp
+          <ul class="default-bullets">
+            <li>See the <a href="#time_format">explanation on the timestamp format</a></li>
+          </ul>
+        </li>
+        <li><b><code>show_in_panel</code>:</b> tells the browser to show the item in the bookmark panel</li>
+        <li><b><code>show_in_personal_bar</code>:</b> tells the browser to show the item in the personal bar</li>
+        <li><b><code>panel_pos</code>:</b> tells the browser which position in the bookmark panel this item should be shown: <i>only valid if <code>show_in_panel</code> is <code>true</code>, otherwise it's usually set to <code>-1</code></i></li>
+        <li><b><code>personal_bar_pos</code>:</b> tells the browser which position in the personal bar this item should be shown: <i>only valid if <code>show_in_personal_bar</code> is <code>true</code>, otherwise it is usually set to <code>-1</code></i></li>
+      </ul>
+    </dd>
+  </dl>
+  <dl>
+    <dt><code>bookmark_folder</code></dt>
+    <dd> Properties:
+      <ul class="default-bullets">
+        <li><b><code>title</code>:</b> self-explanatory <b>[Required]</b></li>
+        <li><b><code>description</code>:</b> the bookmark's long description</li>
+        <li><b><code>nickname</code>:</b> the browser shortcut for quick access from the address bar</li>
+        <li><b><code>type</code>:</b> read-only; if present, the only valid value is "<code>trash</code>", which means that the folder acts as the Trash folder for the datatype</li>
+        <li><b><code>target</code>:</b> read-only; signifies that this folder is accessed by a device with limited capabilities; see the "<a href="#target">Target folders</a>" section for more details</li>
+        <li><b><code>created</code>:</b> creation timestamp (default - current timestamp)
+          <ul class="default-bullets">
+            <li>See the <a href="#time_format">explanation on the timestamp format</a></li>
+          </ul>
+        </li>
+      </ul>
+    </dd>
+  </dl>
+  <dl>
+    <dt><code>bookmark_separator</code></dt>
+    <dd> Properties:
+      <ul class="default-bullets">
+        <li>This item has no usable properties.</li></ul>
+    </dd>
+  </dl>
+  <h4> Notes</h4>
+  <p> Notes support all the functionality described in the API, 
+including container items (folders), trash folder, and automatic 
+creation of unique identifiers. The defined item types for this datatype
+ are:</p>
+  <dl>
+    <dt><code>note</code></dt>
+    <dd> Properties:
+      <ul class="default-bullets">
+        <li><b><code>content</code>:</b> the text of the note <b>[Required]</b></li>
+        <li><b><code>created</code>:</b> creation timestamp (default - current timestamp)
+          <ul class="default-bullets">
+            <li>See the <a href="#time_format">explanation on the timestamp format</a></li>
+        </ul></li>
+        <li><b><code>uri</code>:</b> link to the site from which the note was copied, if any</li></ul>
+    </dd>
+  </dl>
+  <dl>
+    <dt><code>note_folder</code></dt>
+    <dd> Properties:
+      <ul class="default-bullets">
+        <li><b><code>title</code>:</b> self-explanatory <b>[Required]</b></li>
+        <li><b><code>type</code> :</b> Read-only—if present, the only valid value is "<code>trash</code>", which means that
+          the folder acts as the Trash folder for the datatype.</li>
+        <li><b><code>target</code>:</b> Read-only—this signifies that this folder is accessed by a device with limited capabilities;
+          see the <a href="#target">Target folders section</a> for more details.</li></ul>
+    </dd>
+  </dl>
+  <dl>
+    <dt><code>note_separator</code></dt>
+    <dd> Properties:
+      <ul class="default-bullets">
+        <li>This item has no usable properties.</li></ul>
+    </dd>
+  </dl>
+  <h4> Search engines</h4>
+  <p class="lists"> Search Engines are not a structured data type; there is no ordering or nesting. The supported operations are:</p>
+  <ul class="default-bullets">
+    <li>create</li>
+    <li>update</li>
+    <li>delete</li>
+  </ul>
+  <p> Operations like move and trash are not defined, since the Search Engine does not have a nested structure.</p>
+  <p> The only defined item type for this datatype is:</p>
+  <dl>
+    <dt><code>search_engine</code></dt>
+    <dd> Properties:
+      <ul class="default-bullets">
+        <li><b><code>title</code>:</b> Self-explanatory <b>[Required]</b></li>
+        <li><b><code>uri</code>:</b> Search result URI; the formatting operator <code>%s</code> will be replaced by the search terms
+          <b>[Required]</b></li>
+        <li><b><code>encoding</code>:</b> The character encoding of the search field (default - "<code>utf-8</code>")</li>
+        <li><b><code>is_post</code>:</b> Is the search field using the <code>POST</code> method</li>
+        <li><b><code>post_query</code>:</b> The <code>POST</code> parameters for the request</li>
+        <li><b><code>icon</code>:</b> Is base64-encoded, PNG favicon</li>
+        <li><b><code>key</code>:</b> A shortcut to the search engine which can be used in the address field of the browser</li>
+        <li><b><code>show_in_personal_bar</code>:</b> tells the browser to show the item in the personal bar</li>
+        <li><b><code>personal_bar_pos</code>:</b> tells the browser which position in the personal bar this item should be shown:
+          <i>only valid if <code>show_in_personal_bar</code> is <code>true</code>, otherwise it is usually set to <code>-1</code></i></li>
+      </ul>
+    </dd>
+  </dl>
+  <h4> Speed Dial</h4>
+  <p class="lists"> Speed Dial as a data type behaves slightly 
+differently. Its items do not get automatically generated IDs assigned 
+and do not support some of the operations. The supported operations are:</p>
+  <ul class="default-bullets">
+    <li>create</li>
+    <li>update</li>
+    <li>delete</li>
+  </ul>
+  <p> Operations like <code>move</code> and <code>trash</code> are not defined, since the Speed Dial does not have a nested structure.</p>
+  <p> The only defined item type for this datatype is:</p>
+  <dl>
+    <dt><code>speeddial</code></dt>
+    <dd> Properties:
+      <ul class="default-bullets">
+        <li><b><code>title</code>:</b> self-explanatory <b>[Required]</b></li>
+        <li><b><code>uri</code>:</b> self-explanatory <b>[Required]</b></li>
+        <li><b><code>position</code>:</b> read-only, the location of the dial</li>
+        <li><b><code>icon</code>:</b> base64-encoded, PNG favicon</li>
+        <li><b><code>reload_enabled</code>:</b> tells the browser to reload the Speed Dial thumbnail automatically</li>
+        <li><b><code>reload_interval</code>:</b> tells the browser how many seconds it should wait between reloads: <i>ignored if
+          <code>reload_enabled</code> is not <code>true</code></i></li>
+        <li><b><code>reload_only_if_expired</code>:</b> tells the browser to only reload automatically if the site has changed: <i>
+          ignored if <code>reload_enabled</code> is not <code>true</code></i></li>
+      </ul>
+    </dd>
+  </dl>
+  <h4> Url filters</h4>
+  <p class="lists"> Url Filters are not a structured data type; there is no ordering or nesting. The supported operations are:</p>
+  <ul class="default-bullets">
+    <li>create</li>
+    <li>update</li>
+    <li>delete</li>
+  </ul>
+  <p> Operations like move and trash are not defined, since the Url Filter does not have a nested structure.</p>
+  <p> The only defined item type for this datatype is:</p>
+  <dl>
+    <dt><code>urlfilter</code></dt>
+    <dd> Properties:
+      <ul class="default-bullets">
+        <li><b><code>content</code>:</b> the filter itself <b>[Required]</b></li>
+        <li><b><code>type</code>:</b> include/exclude - for whitelist/blacklist <b>[Required]</b></li>
+      </ul>
+    </dd>
+  </dl>
+  <p> A quick description of the url filter format can be found at: <a href="http://www.opera.com/support/mastering/kiosk/#url-filter"> Opera's Kiosk Mode: URL filtering</a></p>
+  <p><a href="#support" class="top">Top</a></p>
+  <h3 id="target" class="separator"> Target folders</h3>
+  <p> Target folders are special folders that contain extra properties, 
+related to their special use in some devices. Typically there is some 
+device with limited capabilities that sees the content of those folders 
+as the only content available. The only currently defined target is 
+"mini".</p>
+  <h4> Target properties</h4>
+  <p> The properties of target folders describe certain rules related to
+ their proper usage. They are just hints for the clients and are not 
+enforced by the server, but note that <code>sub_folders_allowed</code> and <code>separators_allowed</code> apply not only to the target folder itself, but to any subfolder inside it.</p>
+  <dl>
+    <dt><code>move_is_copy</code></dt>
+    <dd> When the user moves an item from outside the target to any folder inside it, the item <b>SHOULD</b> be copied instead of moved, keeping the original intact.</dd>
+    <dt><code>deletable</code></dt>
+    <dd> This specifies whether the folder is allowed to be deleted.</dd>
+    <dt><code>sub_folders_allowed</code></dt>
+    <dd> This specifies whether the folder is allowed to contain sub-folders.</dd>
+    <dt><code>separators_allowed</code></dt>
+    <dd> This specifies whether the folder is allowed to contain separators.</dd>
+    <dt><code>max_items</code></dt>
+    <dd> This specifies the maximum number of items that can be contained within this folder. The special value <code>0</code> indicates no limit.</dd>
+  </dl>
+  <h3 id="time_format" class="separator"> Timestamp format specification</h3>
+  <p> Created and visited properties should have the timestamp format specified by <a href="http://tools.ietf.org/html/rfc3339"> RFC 3339 - Date and Time on the Internet: Timestamps</a>. For example, a valid timestamp is:</p>
+<pre>2010-07-22T05:40:59Z</pre>
+  <h3 id="receive" class="separator"> Receiving Responses</h3>
+  <p> The Link API uses HTTP status codes in its responses. In the case of a successful request, a <code>200 OK</code> response will contain the requested data. All other response codes will not have a message body.</p>
+  <h4> Response codes</h4>
+  <p> Below is a list of all used HTTP status codes:</p>
+  <dl>
+    <dt><code>200 OK</code></dt>
+    <dd> This is a successful request.</dd>
+    <dt><code>204 Deleted</code></dt>
+    <dd> The item was successfully deleted.</dd>
+    <dt><code>400 Bad Request</code></dt>
+    <dd> The request is invalid and cannot be processed. The cause of 
+this is often missing a required parameter or trying to execute an 
+invalid method on an item.</dd>
+    <dt><code>401 Unauthorized</code></dt>
+    <dd> The request cannot be allowed, possibly because your 
+authentication information is invalid or because too many requests sent 
+in a short period made the throttling ban them.</dd>
+    <dt><code>404 Not Found</code></dt>
+    <dd> The item you seek or wish to manipulate was not found.</dd>
+    <dt><code>500 Internal Server Error</code></dt>
+    <dd> This an unexpected server error. If you get such errors, you should consider filing a bug.</dd>
+    <dt><code>501 Not Implemented</code></dt>
+    <dd> You are trying to execute a method that is not implemented. 
+This can happen when you execute a method that is not supported by the 
+specific datatype or if you misspelled a method name in the request.</dd>
+  </dl>
+  <h4> Response structure</h4>
+  <p> All responses have an unified structure, regardless of the format 
+in which they are presented. Every response contains a list of resources
+ that represents the results of the API calls. Usually those will be 
+items of the corresponding Link datatype for which the call was made.</p>
+  <p class="lists"> Every resource is identified by its <i>type</i> and <i>id</i>.</p>
+  <ul class="default-bullets">
+    <li>The <b><i>type</i></b> ("<code>item_type</code>" property) describes what the item is: a bookmark, a note folder, a (Speed Dial) dial item.</li>
+    <li>The <b><i>id</i></b> ("<code>id</code>" property) is the unique identifier assigned to every item within the system.</li>
+  </ul>
+  <p> Every resource has a set of properties that shows the actual data 
+contained within each item. All properties are datatype specific and 
+their number can be different for each item. Empty properties are 
+considered to be missing and will not be returned.</p>
+  <h5 id="choosing"> Choosing the output format</h5>
+  <p> There are currently two supported output formats: JSON and XML. By default the API will reply with the <code>Content-Type</code> used for the request, or with JSON if none was provided.</p>
+  <p class="lists"> You have two ways to select an output format: the <code>api_output</code> parameter and the Accept HTTP header.</p>
+  <ul class="default-bullets">
+    <li>To set the output format with the <code>api_output</code> parameter, simply pass "<code>json</code>" or "<code>xml</code>" to it.</li>
+    <li>To set it with the Accept header, set it to "<code>application/json</code>" or "<code>application/xml</code>".</li>
+  </ul>
+  <p class="lists"> Setting the output format explicitly <i>always overrides</i> the default setting. The order in which the different possibilities are evaluated is:</p>
+  <ul class="default-bullets">
+    <li><code>api_output</code> parameter &gt; Accept header &gt; Content-type header &gt; Default (JSON)</li>
+  </ul>
+  <h5> JSON (JavaScript Object Notation) Response Format</h5>
+  <p> If nothing else is specified, the REST API will return response 
+data in JSON format, which is the default output format for the system. 
+The response is a list that contains objects, each representing one 
+result of the API call. The content of all items will be what you would 
+expect in a complex JSON structure: it is contained within objects and 
+lists. The following script is an example of JSON output:</p>
+<pre class="sh_javascript sh_sourceCode"><span class="sh_symbol">[</span>
+  <span class="sh_cbracket">{</span>
+    <span class="sh_string">"item_type"</span><span class="sh_symbol">:</span> <span class="sh_string">"bookmark_folder"</span><span class="sh_symbol">,</span>
+    <span class="sh_string">"id"</span><span class="sh_symbol">:</span> <span class="sh_string">"46A52AB96FDD4991943193797186E4D5"</span><span class="sh_symbol">,</span>
+    <span class="sh_string">"properties"</span><span class="sh_symbol">:</span> <span class="sh_cbracket">{</span>
+      <span class="sh_string">"nickname"</span><span class="sh_symbol">:</span> <span class="sh_string">"comics"</span><span class="sh_symbol">,</span>
+      <span class="sh_string">"title"</span><span class="sh_symbol">:</span> <span class="sh_string">"Daily Comics"</span>
+    <span class="sh_cbracket">}</span>
+  <span class="sh_cbracket">}</span>
+<span class="sh_symbol">]</span>
+</pre>
+  <h5> XML Response Format</h5>
+  <p> The Opera Link API supports output in XML format. This output can 
+be requested using the methods described above. The root of the document
+ is an element that contains the aforementioned list of results, each 
+contained within an element. The following markup is an example of XML 
+output:</p>
+<pre class="sh_xml sh_sourceCode"><span class="sh_keyword">&lt;response&gt;</span>
+  <span class="sh_keyword">&lt;resource&gt;</span>
+    <span class="sh_keyword">&lt;item_type&gt;</span>speeddial<span class="sh_keyword">&lt;/item_type&gt;</span>
+    <span class="sh_keyword">&lt;id&gt;</span>1<span class="sh_keyword">&lt;/id&gt;</span>
+    <span class="sh_keyword">&lt;properties&gt;</span>
+      <span class="sh_keyword">&lt;uri&gt;</span>www.google.com<span class="sh_keyword">&lt;/uri&gt;</span>
+      <span class="sh_keyword">&lt;title&gt;</span>Google Search<span class="sh_keyword">&lt;/title&gt;</span>
+    <span class="sh_keyword">&lt;/properties&gt;</span>
+  <span class="sh_keyword">&lt;/resource&gt;</span>
+<span class="sh_keyword">&lt;/response&gt;</span>
+</pre>
+  <p><a href="#support" class="top">Top</a></p>
+  <h3 id="auth" class="separator"> Authentication</h3>
+  <p> Since the requests are stateless, every request MUST contain 
+authentication information. If authentication information is not 
+provided, the server will automatically reply with HTTP code 401 
+Unauthorized.</p>
+  <p> For clarity, all authentication parameters are omitted throughout the documentation. They MUST be provided in <em>every</em> request.</p>
+  <p> Opera Link's Public API uses <b>auth.opera.com (Auth)</b> as its 
+authentication service. All users registered in Opera Auth (i.e., any 
+account registered for any Opera service, such as My Opera, Opera Unite,
+ Opera Portal, and, of course, Opera Link itself) can use the Opera Link
+ service and its public API.</p>
+  <p class="alert">Please note Opera Unite will be disabled by default 
+in Opera 12.00 and unavailable as of Opera 12.50. More information about
+ this is available <a href="http://my.opera.com/addons/blog/2012/04/24/sunsetting-unite-and-widgets">here</a>.</p>
+
+  <h4> OAuth parameters</h4>
+  <p> To obtain the necessary tokens, go to <a href="https://auth.opera.com/service/oauth/applications/">https://auth.opera.com/service/oauth/applications/</a>. You can find more information about OAuth in the <a href="http://oauth.net/">OAuth website</a>. </p>
+  <p> All requests to Opera Link's public API servce MUST therefore be 
+signed with HMAC_SHA1 algorithm as described in the OAuth guide or they 
+will be automatically rejected.</p>
+  <p> In most cases, you would want to use an already existing library 
+for creating OAuth requests, and these are available for most languages.</p>
+  <p class="lists"> The OAuth procedure requires you to obtain a valid access token and secret and to use those to sign your requests.</p>
+  <dl>
+    <dt><code>oauth_timestamp</code></dt>
+    <dd> This is a UNIX epoch timestamp, obtained from the system at the
+ time of making the request. Most OAuth packages will do that 
+automatically.</dd>
+    <dt><code>oauth_nonce</code></dt>
+    <dd> This is a randomly generated string that must be unique for 
+every request made to the system. The OAuth server will check and 
+enforce the uniqueness for this parameter, so you MUST create a unique 
+random string on each request. Most OAuth packages will do that 
+automatically.</dd>
+    <dt><code>oauth_token</code></dt>
+    <dd> This is the access token, as obtained by the Opera Auth system.</dd>
+    <dt><code>oauth_version</code></dt>
+    <dd> Set this to "1.0".</dd>
+    <dt><code>oauth_signature</code></dt>
+    <dd> This is the signature for the request, and it is created as 
+OAuth rules dictate. This is usually automatically created for you by 
+the OAuth package that you are using.</dd>
+  </dl>
+  <p> For more details about OAuth authentication and examples in Perl and Python, you can visit our <a href="http://www.opera.com/docs/apis/linkrest/oauthexamples/"> OAuth examples page</a>.</p>
+  <p><a href="#support" class="top">Top</a></p>
+  
+  
+</div><div class="aside"><h3>Support</h3><!--[support]--><ul class="pagenav"><li><a href="http://www.opera.com/support/">Overview</a></li><li><a href="http://www.opera.com/support/tutorials/">Tutorials</a></li><li><a href="http://www.opera.com/support/community/">Online communities</a></li><li class="parent"><a href="http://www.opera.com/support/bugs/">
+      Reporting bugs
+      </a></li><li><a href="http://www.opera.com/support/webmail/">Opera Web Mail</a></li><li><a href="http://www.opera.com/support/access/">Access Opera</a></li><li class="open"><a href="http://www.opera.com/docs/">
+      Documentation
+      </a><!--[docs]--><ul class="pagenav"><li><a href="http://www.opera.com/docs/apis/extensions/">Opera Extensions APIs</a></li><li class="active"><a href="http://www.opera.com/docs/apis/linkrest/">
+          Opera Link REST API
+          </a><!--[operalink]--><ul class="pagenav"><li><a href="http://www.opera.com/docs/apis/linkrest/oauthexamples/">OAuth examples</a></li></ul></li><li class="parent"><a href="http://www.opera.com/docs/specs/">
+          Web specifications support
+          </a></li><li><a href="http://www.opera.com/docs/history/">Version history</a></li><li class="parent"><a href="http://www.opera.com/docs/changelogs/">
+          Changelogs
+          </a></li><li><a href="http://www.opera.com/docs/browserjs/">Browser JavaScript</a></li><li><a href="http://www.opera.com/docs/switches/">Command Line options</a></li><li><a href="http://www.opera.com/support/mastering/kiosk/">Kiosk mode</a></li><li><a href="http://www.opera.com/support/usingopera/operaini/">Opera.ini</a></li><li class="parent"><a href="http://www.opera.com/docs/plugins/">
+          Plug-ins
+          </a></li><li class="parent"><a href="http://www.opera.com/docs/linux/plugins/">
+          Linux Plug-ins
+          </a></li><li><a href="http://www.opera.com/docs/ca/">Root certificates</a></li><li><a href="http://www.opera.com/support/mastering/sysadmin/">Sysadmin handbook</a></li><li><a href="http://www.opera.com/docs/usercss/">User CSS</a></li><li class="parent"><a href="http://www.opera.com/docs/userjs/">
+          User JavaScript
+          </a></li></ul></li></ul>
+          </div></div>
+        <div id="footer">
+			<div class="navigation">
+				<div id="breadcrumbs" class="section">
+					<ul>
+						<li><a href="http://www.opera.com/">Opera</a> » </li>
+						<li><a href="http://www.opera.com/support/">Support</a> » </li>
+						<li><a href="http://www.opera.com/docs/">Documentation</a> » </li>
+						<li><b><a href="http://www.opera.com/docs/apis/linkrest">Opera Link REST API</a></b></li>
+					</ul>
+				</div>
+        <div class="section">
+			<ul>
+				<li><h5>Get Opera</h5></li>
+				<li><a href="http://www.opera.com/browser/download/">Windows, Mac &amp; Linux</a></li>
+				<li><a href="http://www.opera.com/mobile/download/">Mobile phones</a></li>
+				<li><a href="http://www.opera.com/mobile/download/">Tablets</a></li>
+			</ul><ul>
+				<li><h5>Add-ons</h5></li>
+				<li><a href="http://www.opera.com/link/">Opera Link</a></li>
+				<li><a href="http://www.opera.com/mail/">Opera Mail</a></li>
+				<li><a href="http://www.opera.com/browser/turbo/">Opera Turbo</a></li>
+				<li><a href="http://www.opera.com/addons/extensions/">Opera extensions</a></li>
+			</ul><ul>
+				<li><h5>Company</h5></li>
+				<li><a href="http://www.opera.com/company/">About Opera</a></li>
+				<li><a href="http://www.opera.com/company/jobs/">Jobs</a></li>
+				<li><a href="http://www.opera.com/company/investors/">Investors</a></li>
+				<li><a href="http://www.opera.com/company/executive/">Executive team</a></li>
+				<li><a href="http://www.opera.com/company/events/">Events</a></li>
+			</ul><ul>
+				<li><h5>Press</h5></li>
+				<li><a href="http://www.opera.com/press/releases/">Press releases</a></li>
+				<li><a href="http://www.opera.com/press/resources/">Press resources</a></li>
+				<li><a href="http://www.opera.com/press/video/">Opera Video</a></li>
+				<li><a href="http://www.opera.com/press/facts/">Fast facts</a></li>
+				<li><a href="http://www.opera.com/press/faq/"><abbr title="Frequently asked questions">FAQ</abbr></a></li>
+				<li><a href="http://www.opera.com/smw/"><abbr title="State of mobile Web">SMW</abbr> report</a></li>
+			</ul><ul>
+				<li><h5>Business</h5></li>
+				<li><a href="http://www.opera.com/business/">Overview</a></li>
+				<li><a href="http://www.opera.com/business/operators/">Network operators</a></li>
+				<li><a href="http://www.opera.com/business/mobile/">Mobile OEMs</a></li>
+				<li><a href="http://www.opera.com/business/devices/">Device OEMs</a></li>
+				<li><a href="http://www.opera.com/business/content/">Advertising</a></li>
+				<li><a href="http://www.opera.com/business/newsletter/">Newsletter</a></li>
+			</ul><ul>
+				<li><h5>Useful links</h5></li>
+				<li><a href="http://www.opera.com/support/">Support</a></li>
+				<li><a href="http://www.opera.com/docs/">Documentation</a></li>
+				<li><a href="http://www.opera.com/support/kb/">Knowledge base</a></li>
+				<li><a href="http://www.opera.com/index/">Site map</a></li>
+				<li><a href="http://www.opera.com/company/jobs/">Jobs</a></li>
+				<li><a href="http://www.opera.com/company/contact/">Contact</a></li>
+			</ul>
+		</div>
+		<div>
+			<p id="footer-copyright">Copyright © 2012 <a href="http://www.opera.com/">Opera Software <abbr title="Allmennaksjeselskap">ASA</abbr></a>. All rights reserved. <a href="http://www.opera.com/privacy/" title="Privacy Policy">Privacy</a>.</p>
+			<p id="footer-promo">More than <strong>270 million</strong> users worldwide</p>
+		</div>
+	</div>
+</div>
+
+</body></html>
